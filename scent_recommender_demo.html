@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scent Recommender Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 40px;
+      max-width: 700px;
+      margin: auto;
+    }
+    h1 { text-align: center; }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    select, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      background: black;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+    #result {
+      padding: 20px;
+      border-radius: 10px;
+      background: #fff3cd;
+      display: none;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Scent Recommender Demo</h1>
+
+  <div class="card">
+    <h3>Select Your Preferred Notes</h3>
+    <select id="notes">
+      <option value="floral">Floral (rose, jasmine, peony)</option>
+      <option value="citrus">Citrus (bergamot, lemon)</option>
+      <option value="fresh">Fresh (marine, clean)</option>
+      <option value="woody">Woody (sandalwood, cedar)</option>
+      <option value="sweet">Sweet/Gourmand (vanilla, caramel)</option>
+      <option value="spicy">Spicy (saffron, pepper)</option>
+    </select>
+  </div>
+
+  <div class="card">
+    <h3>Choose the Mood You Want</h3>
+    <select id="mood">
+      <option value="romantic">Romantic</option>
+      <option value="fresh">Fresh / Clean</option>
+      <option value="warm">Warm / Cozy</option>
+      <option value="mysterious">Mysterious</option>
+      <option value="energetic">Energetic</option>
+      <option value="earthy">Earthy / Natural</option>
+    </select>
+  </div>
+
+  <button onclick="recommend()">Get My Scent Match</button>
+
+  <div id="result"></div>
+
+  <script>
+    function recommend() {
+      const notes = document.getElementById('notes').value;
+      const mood = document.getElementById('mood').value;
+      const result = document.getElementById('result');
+
+      const personas = {
+        floral: 'The Romantic Floral — soft, elegant, feminine florals with airy musks.',
+        citrus: 'The Energetic Citrus Lover — bright, uplifting, sparkling freshness.',
+        fresh: 'The Fresh Minimalist — clean, crisp, modern and effortless.',
+        woody: 'The Earthy Naturalist — grounded, warm, woody sophistication.',
+        sweet: 'The Sweet Dreamer — warm, cozy, deliciously addictive gourmand tones.',
+        spicy: 'The Bold & Mysterious — deep, smoky, sensual and unforgettable.'
+      };
+
+      const description = personas[notes] || 'A unique scent blend tailored just for you!';
+
+      result.style.display = 'block';
+      result.innerHTML = `
+        <h3>Your Scent Persona</h3>
+        <p><strong>Mood:</strong> ${mood.charAt(0).toUpperCase() + mood.slice(1)}</p>
+        <p><strong>Match:</strong> ${description}</p>
+      `;
+    }
+  </script>
+</body>
+</html>
